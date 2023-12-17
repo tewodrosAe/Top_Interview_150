@@ -6,6 +6,4 @@ class Solution:
             if nums[i] >= (goal - i):
                 goal = i
         
-        answer = True if goal == 0 else False
-        
-        return answer
+        return True if goal == 0 else False
