@@ -3,7 +3,6 @@ class Solution:
         l, r = 0, 0
         
         while r < len(t) and l < len(s):
-            print(l)
             if s[l] == t[r]:
                 l += 1
             r += 1
