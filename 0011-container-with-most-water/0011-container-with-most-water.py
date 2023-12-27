@@ -3,7 +3,7 @@ class Solution:
         l, r = 0, len(height) - 1
         maxCont = 0
         
-        while l <= r:
+        while l < r:
             distance =  r - l
             maxCont = max(maxCont, min(height[l],height[r]) * distance)
             if height[l] > height[r]:
