@@ -3,16 +3,13 @@ class Solution:
         if s == "":
             return 0
         maxString = 0
-        stringList = []
-        l,r = 0,0
-        while r < len(s):
-            if s[r] in stringList:
-                maxString = max(maxString, r-l)
-                while s[r] in stringList:
-                    stringList.pop(0)
-                    l += 1
-            stringList.append(s[r])
-            r += 1
-        maxString = max(maxString, r-l)    
+        stringSet = set()
+        l = 0
+        for r in range(len(s)):
+            while s[r] in stringSet:
+                stringSet.remove(s[l])
+                l += 1
+            stringSet.add(s[r])
+            maxString = max(maxString, r-l+1) 
         return maxString
             
