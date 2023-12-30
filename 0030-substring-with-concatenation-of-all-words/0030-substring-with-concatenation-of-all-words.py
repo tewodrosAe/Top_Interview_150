@@ -7,14 +7,15 @@ class Solution:
         
         for word in words:
             wordsDict[word] = wordsDict.get(word,0) + 1
-    
-        for l in range(len(s) - concatLength + 1):
+        
+        l = 0
+        
+        while l < (len(s) - concatLength + 1):
             wordsSeen = {}
             
             for r in range(l, l + concatLength, wordLength):
                 tempWord = s[r: r + wordLength]
                 if tempWord not in wordsDict:
-                    l = r + wordLength
                     break
                 wordsSeen[tempWord] = wordsSeen.get(tempWord,0) + 1
                 if wordsSeen[tempWord] > wordsDict[tempWord]:
@@ -22,5 +23,6 @@ class Solution:
             
             if wordsSeen == wordsDict:
                 res.append(l)
+            l += 1
             
         return res
