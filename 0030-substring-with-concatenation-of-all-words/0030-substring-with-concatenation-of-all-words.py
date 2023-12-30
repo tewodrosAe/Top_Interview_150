@@ -2,30 +2,32 @@ class Solution:
     def findSubstring(self, s: str, words: List[str]) -> List[int]:
         if len(words) == 0:
             return []
+        
         wordLength = len(words[0])
-        concatLength = len(words[0]) * len(words)
         wordsDict = {}
+        for w in words:
+            wordsDict[w] = wordsDict.get(w,0) + 1
         res = []
-        
-        for word in words:
-            wordsDict[word] = wordsDict.get(word,0) + 1
-        
-        l = 0
-        
-        while l < (len(s) - concatLength + 1):
-            wordsSeen = {}
-            
-            for r in range(l, l + concatLength, wordLength):
-                tempWord = s[r: r + wordLength]
-                if tempWord not in wordsDict:
-                    break
-                wordsSeen[tempWord] = wordsSeen.get(tempWord,0) + 1
-                if wordsSeen[tempWord] > wordsDict[tempWord]:
-                    word
-                    break
-            
-            if wordsSeen == wordsDict:
-                res.append(l)
-            l += 1
-            
+        for k in range(wordLength):
+            l = k
+            subd = {}
+            count = 0
+            for j in range(k, len(s)-wordLength+1, wordLength):
+                tword = s[j:j+wordLength]
+                
+                if tword in wordsDict:
+                    subd[tword] = subd.get(tword,0) + 1
+                    count += 1
+                    while subd[tword] > wordsDict[tword]:
+                        subd[s[l:l+wordLength]] -= 1
+                        l += wordLength
+                        count -= 1
+                    if count == len(words):
+                        res.append(l)
+                # not valid
+                else:
+                    l = j + wordLength
+                    subd = {}
+                    count = 0
+
         return res
