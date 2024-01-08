@@ -6,8 +6,6 @@ class Solution:
             '}':'{'
         }
         stack = []
-        length = len(s)
-        
         for i in s:
             if i not in dict:
                 stack.append(i)
