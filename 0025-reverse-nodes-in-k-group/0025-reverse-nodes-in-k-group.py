@@ -6,27 +6,27 @@
 class Solution:
     def reverseKGroup(self, head: Optional[ListNode], k: int) -> Optional[ListNode]:
         dummyNode = ListNode(0, head)
-        groupPrev = dummyNode
+        prevGroup = dummyNode
         
         while True:
-            last = self.curGroup(groupPrev, k)
+            last = self.getLast(prevGroup,k)
             if not last:
                 break
-            groupNext = last.next
-            prev, current = last.next, groupPrev.next
-            while current != groupNext:
+            prev, current = last.next, prevGroup.next
+            lastNext = last.next
+            while current != lastNext:
                 temp = current.next
                 current.next = prev
                 prev = current
-                current = temp
-            temp = groupPrev.next
-            groupPrev.next = last
-            groupPrev = temp
+                current = temp 
+            temp = prevGroup.next
+            prevGroup.next = last
+            prevGroup = temp
         return dummyNode.next
-        
-        
-    def curGroup(self,current,k):
-        while current and k > 0:
-            current = current.next
+            
+            
+    def getLast(self,last,k):
+        while k > 0 and last:
+            last = last.next
             k -= 1
-        return current
+        return last
